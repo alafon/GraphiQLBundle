@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Overblog\GraphiQLBundle\Tests\Fixtures;
+namespace Overblog\GraphiQLBundle\Tests\Functional\DependencyInjection\Fixtures\Php;
 
 use Overblog\GraphiQLBundle\OverblogGraphiQLBundle;
 use Overblog\GraphiQLBundle\Tests\TestKernel as AbstractTestKernel;
@@ -27,12 +27,10 @@ final class TestKernel extends AbstractTestKernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
+        $loader->load(__DIR__.'/config.php');
         $loader->load(function (ContainerBuilder $container): void {
             $container->loadFromExtension('framework', [
-                'secret' => 'test',
-                'test' => true,
                 'assets' => ['enabled' => false],
-                'router' => ['resource' => '%kernel.project_dir%/src/Resources/config/routing.php'],
             ]);
         });
     }
